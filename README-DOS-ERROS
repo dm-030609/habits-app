@@ -1,0 +1,108 @@
+## 🚾 Histórico de Erros e Soluções - Conexão com MongoDB (Projeto HabitsApp) 20.04.25
+
+Durante o desenvolvimento da API backend do projeto **HabitsApp**, encontramos uma série de erros relacionados à conexão com o banco de dados **MongoDB Atlas**. Abaixo está um relato documentado de todos os erros enfrentados e como cada um foi solucionado. Isso serve tanto como aprendizado quanto como guia de referência para futuros projetos.
+
+---
+
+### 📍 Problema 1: `.env` não estava sendo carregado corretamente
+
+**Erro:**
+```bash
+The `uri` parameter to `openUri()` must be a string, got "undefined".
+```
+
+**Causa:**
+- O arquivo `.env` existia, mas o conteúdo **não estava sendo lido** corretamente pelo `dotenv`.
+
+**Solução:**
+- Foi necessário **deletar o `.env` antigo e criar um novo manualmente**, com a codificação correta e sem espaços extras ou caracteres invisíveis.
+
+---
+
+### 📍 Problema 2: `MODULE_NOT_FOUND` ao tentar carregar `.env`
+
+**Erro:**
+```bash
+Error: Cannot find module '.env'
+```
+
+**Causa:**
+- Tentativa de importar o `.env` com `require('.env')`, quando o correto seria apenas carregar o conteúdo usando `dotenv`.
+
+**Solução:**
+- Corrigir o código para:
+  ```js
+  require('dotenv').config();
+  ```
+
+---
+
+### 📍 Problema 3: Variável `MONGO_URI` ainda retornando `undefined`
+
+**Debug:**
+```js
+console.log(process.env.MONGO_URI); // retornava undefined
+```
+
+**Causa:**
+- `.env` não estava sendo corretamente reconhecido, mesmo após correções iniciais.
+
+**Solução:**
+- Verificar se o arquivo `.env` estava realmente salvo na **pasta correta** (`habits-backend`).
+- Garantir que não existia nenhuma extensão no nome do arquivo como `.env.txt`.
+
+---
+
+### 📍 Problema 4: Erro de autenticação no MongoDB
+
+**Erro:**
+```bash
+MongoServerError: bad auth : authentication failed
+```
+
+**Causa:**
+- O usuário ou senha do MongoDB Atlas estavam incorretos.
+- A URI estava com `<senha>` escrita literalmente ou com caracteres especiais mal formatados.
+
+**Solução:**
+- Atualizar a variável `MONGO_URI` no `.env` com a senha correta e sem caracteres especiais quebrando a string.
+- Exemplo:
+  ```env
+  MONGO_URI=mongodb+srv://usuario:senha@host.mongodb.net/?retryWrites=true&w=majority&appName=MeuApp
+  ```
+
+---
+
+### ✅ Solução Final
+
+Após todos os ajustes, o log passou a exibir com sucesso:
+
+```bash
+Servidor rodando na porta 5000
+Conectado ao MongoDB
+```
+
+---
+
+### 🧠 Aprendizados
+
+- Sempre verifique se o `.env` está **corretamente salvo e formatado**.
+- Utilize `console.log` para depurar variáveis de ambiente.
+- Senhas com caracteres especiais devem ser **URL encoded** ou evitadas para conexões simples.
+- Nunca subestime um `.env` bugado — às vezes o problema tá no invisível!
+
+---
+
+### 🫠 Dica extra
+
+Adicione o `.env` ao `.gitignore` para evitar que ele vá pro GitHub:
+
+```bash
+# .gitignore
+.env
+```
+
+---
+
+
+
