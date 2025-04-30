@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const mongoose = require("mongoose");
+const admin = require("firebase-admin");
 
 
 //Configuração do express
@@ -20,7 +21,12 @@ mongoose.connect(process.env.MONGO_URI,{
     .catch((err) => console.error("Erro ao conectar ao MongoDB", err));
 
     //Rota inicial
-app.get("/", (req, res) => res.send("API rodando!"));
+//app.get("/", (req, res) => res.send("API rodando!"));
+
+//Rota protegida
+//app.get('/perfil', verifyToken, (req, res) => {
+    //res.send(`Olá, ${req.user.name || 'usuário'}! Seu UID é: ${req.user.uid}`);
+  //});
 
 //Iniciar  o servidor
 const PORT = process.env.PORT || 5000;
