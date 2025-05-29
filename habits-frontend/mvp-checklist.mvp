@@ -1,0 +1,31 @@
+# ✅ Checklist de Funcionalidades do MVP - Habits App
+
+## 👤 Autenticação
+- [ ] Cadastro de novo usuário
+- [ ] Login com autenticação segura (token)
+
+## 📋 Gerenciamento de Hábitos
+- [ ] Tela principal: mostrar hábitos do dia
+- [ ] Marcar hábito como concluído
+- [ ] Criar novo hábito
+- [ ] Editar hábito existente
+- [ ] Deletar hábito
+
+## 📈 Progresso
+- [ ] Mostrar histórico visual (percentual ou foguinho)
+- [ ] Exibir hábitos mais frequentes
+
+## 🧩 UI Mobile-First
+- [ ] Layout otimizado para telas pequenas
+- [ ] Fontes legíveis e botões grandes
+- [ ] Navegação fluida com barra fixa inferior
+
+## 💾 Backend e Integração
+- [ ] API REST (habits, users, auth)
+- [ ] Conexão com MongoDB
+- [ ] Autenticação com JWT ou Firebase
+
+## 🚀 Progressive Web App (PWA)
+- [ ] Instalação como app mobile
+- [ ] Funciona offline com cache básico
+- [ ] Ícone e splash screen personalizados
